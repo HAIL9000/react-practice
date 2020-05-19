@@ -21,25 +21,41 @@ class Calculator extends React.Component {
         super(props);
 
         this.state = {
-            userInput: [],
+            userInput: [[]],
+            userInputCount: 0,
         };
     }
 
     handleClick(id) {
         const userInput = this.state.userInput
-        userInput.push(id)
+        const userInputCount = this.state.userInputCount
+
+        const operators = ["+","-","x","÷","="]
 
         if(id === "CLEAR"){
             this.setState(
                 {
-                    userInput: [],
+                    userInput: [[]],
+                    userInputCount: 0,
                 }
             );
 
-        } else {
+        } else if(operators.includes(id)) {
+            userInput.push([id])
+            userInput.push([])
             this.setState(
                 {
                     userInput: userInput,
+                    userInputCount: userInputCount + 2,
+                }
+            )
+
+        } else {
+            userInput[userInputCount].push(id)
+            this.setState(
+                {
+                    userInput: userInput,
+                    userInputCount: userInputCount,
                 }
             );
         }
@@ -55,7 +71,8 @@ class Calculator extends React.Component {
     }
 
     render() {
-        const screen = "Input: " + this.state.userInput.join('')
+        const currentInput = this.state.userInput[this.state.userInputCount]
+        const screen = "Input: " + currentInput.join('')
         return(
             <div>
                 {screen}
