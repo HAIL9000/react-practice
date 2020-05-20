@@ -32,6 +32,7 @@ class Calculator extends React.Component {
 
         const operators = ["+","-","x","÷","="];
 
+        // CLEAR case
         if(id === "CLEAR"){
             this.setState(
                 {
@@ -40,16 +41,29 @@ class Calculator extends React.Component {
                 }
             );
 
+        // operator case
         } else if(operators.includes(id)) {
-            userInput.push([id])
-            userInput.push([])
-            this.setState(
-                {
-                    userInput: userInput,
-                    userInputCount: userInputCount + 2,
-                }
-            );
-
+            // if the last entry was an operator, replace it rather
+            // than pushing a new one on
+            if(userInput.length > 1 && userInput[userInputCount].length === 0 && operators.includes(userInput[userInputCount - 1][0])) {
+                userInput[userInputCount - 1] = [id]
+                this.setState(
+                    {
+                        userInput: userInput,
+                        userInputCount: userInputCount,
+                    }
+                );
+            } else {
+                userInput.push([id])
+                userInput.push([])
+                this.setState(
+                    {
+                        userInput: userInput,
+                        userInputCount: userInputCount + 2,
+                    }
+                );
+             }
+        // number entry case
         } else {
             if (!(userInput[userInputCount].includes('.') && id === '.')) {
                 userInput[userInputCount].push(id);
