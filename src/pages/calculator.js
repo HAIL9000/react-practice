@@ -27,8 +27,8 @@ class Calculator extends React.Component {
     }
 
     handleClick(id) {
-        const userInput = this.state.userInput;
-        const userInputCount = this.state.userInputCount;
+        let userInput = this.state.userInput;
+        let userInputCount = this.state.userInputCount;
 
         const operators = ["+","-","x","÷","="];
 
@@ -43,6 +43,19 @@ class Calculator extends React.Component {
 
         // operator case
         } else if(operators.includes(id)) {
+            // if the user input is three long, we have two numbers and an operator
+            // so do some math and condense
+            if(userInput.length === 3){
+                userInput = doMath(userInput)
+                userInputCount = 0;
+                this.setState(
+                    {
+                        userInput: userInput,
+                        userInputCount: userInputCount,
+                    }
+                );
+            }
+
             // if the last entry was an operator, replace it rather
             // than pushing a new one on
             if(userInput.length > 1 && userInput[userInputCount].length === 0 && operators.includes(userInput[userInputCount - 1][0])) {
@@ -122,6 +135,7 @@ class Calculator extends React.Component {
             </div>
         );
     }
+
 }
 
 const CalculatorPage = () => (
@@ -132,5 +146,38 @@ const CalculatorPage = () => (
         <Link  to="/">Go Home</Link>
     </Layout>
 )
+
+// actually preform math operation on calcualtor input
+// returns an updated user input data structure for the
+// calculator to update its state with
+function doMath(input) {
+    const left = Number(input[0].join(""));
+    const operation = input[1][0];
+    const right = Number(input[2].join(""));
+
+    let result = 0;
+
+    switch(operation){
+        case "+":
+            result = left + right;
+            break;
+        case "-":
+            result = left - right;
+            break;
+        case "x":
+            result = left * right;
+            break;
+        case "÷":
+            result = left / right;
+            break;
+        case "=":
+            result = right;
+            break;
+    }
+
+    const arrayResult = (result + "").split("")
+    return [arrayResult];
+
+}
 
 export default CalculatorPage
