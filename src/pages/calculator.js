@@ -12,7 +12,7 @@ function CalcButton(props) {
         <button className={calculatorStyles.button} onClick={props.onClick}>
             {props.id}
         </button>
-    )
+    );
 }
 
 // "Class" syntax component
@@ -27,10 +27,10 @@ class Calculator extends React.Component {
     }
 
     handleClick(id) {
-        const userInput = this.state.userInput
-        const userInputCount = this.state.userInputCount
+        const userInput = this.state.userInput;
+        const userInputCount = this.state.userInputCount;
 
-        const operators = ["+","-","x","÷","="]
+        const operators = ["+","-","x","÷","="];
 
         if(id === "CLEAR"){
             this.setState(
@@ -48,10 +48,12 @@ class Calculator extends React.Component {
                     userInput: userInput,
                     userInputCount: userInputCount + 2,
                 }
-            )
+            );
 
         } else {
-            userInput[userInputCount].push(id)
+            if (!(userInput[userInputCount].includes('.') && id === '.')) {
+                userInput[userInputCount].push(id);
+            }
             this.setState(
                 {
                     userInput: userInput,
