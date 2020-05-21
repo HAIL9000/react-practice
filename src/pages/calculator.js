@@ -23,6 +23,7 @@ class Calculator extends React.Component {
         this.state = {
             userInput: [[]],
             userInputCount: 0,
+            displayIndex: 0,
         };
     }
 
@@ -38,6 +39,7 @@ class Calculator extends React.Component {
                 {
                     userInput: [[]],
                     userInputCount: 0,
+                    displayIndex: 0,
                 }
             );
 
@@ -52,6 +54,7 @@ class Calculator extends React.Component {
                     {
                         userInput: userInput,
                         userInputCount: userInputCount,
+                        displayIndex: userInputCount,
                     }
                 );
             }
@@ -85,6 +88,7 @@ class Calculator extends React.Component {
                 {
                     userInput: userInput,
                     userInputCount: userInputCount,
+                    displayIndex: userInputCount,
                 }
             );
         }
@@ -100,7 +104,7 @@ class Calculator extends React.Component {
     }
 
     render() {
-        const currentInput = this.state.userInput[this.state.userInputCount]
+        const currentInput = this.state.userInput[this.state.displayIndex]
         const screen = "Input: " + currentInput.join('')
         return(
             <div>
