@@ -1,6 +1,25 @@
 .button {
+    border-radius: 10px;
     margin-top: 10px;
     margin-right: 10px;
     margin-left: 10px;
     margin-bottom: 10px;
+}
+
+.screen {
+    border-radius: 25px;
+    background-color: #ffedbf;
+    width: 300px;
+    height: 40px;
+}
+
+.calcBackground {
+    border-radius: 25px;
+    background-color: #d9bae8;
+    width: 300px;
+}
+
+.buttonRow {
+    width: 70%;
+    margin: 0 auto;
 }

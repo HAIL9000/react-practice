@@ -105,36 +105,40 @@ class Calculator extends React.Component {
 
     render() {
         const currentInput = this.state.userInput[this.state.displayIndex]
-        const screen = "Input: " + currentInput.join('')
+        const screen = currentInput.join('')
         return(
-            <div>
-                {screen}
-                <div>
+            <div class={calculatorStyles.calcBackground}>
+                <div class={calculatorStyles.screen}>
+                    <div style={{'margin-left' : '10px'}}>
+                        {screen}
+                    </div>
+                </div>
+                <div class={calculatorStyles.buttonRow}>
                     {this.renderButton(1)}
                     {this.renderButton(2)}
                     {this.renderButton(3)}
                     {this.renderButton('+')}
                 </div>
-                <div>
+                <div class={calculatorStyles.buttonRow}>
                     {this.renderButton(4)}
                     {this.renderButton(5)}
                     {this.renderButton(6)}
                     {this.renderButton('-')}
                 </div>
+                <div class={calculatorStyles.buttonRow}>
                     {this.renderButton(7)}
                     {this.renderButton(8)}
                     {this.renderButton(9)}
                     {this.renderButton('x')}
-                <div>
                 </div>
+                <div class={calculatorStyles.buttonRow}>
                     {this.renderButton(0)}
                     {this.renderButton('.')}
                     {this.renderButton('=')}
                     {this.renderButton('÷')}
-                <div>
                 </div>
+                <div style={{'margin-left': '65%'}}>
                     {this.renderButton('CLEAR')}
-                <div>
                 </div>
             </div>
         );
