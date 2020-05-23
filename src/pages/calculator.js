@@ -55,6 +55,7 @@ class Calculator extends React.Component {
                         displayIndex: userInputCount,
                     }
                 );
+            }
         // all other operators case
         } else if(operators.includes(id)) {
             // if the user input is three long, we have two numbers and an operator
