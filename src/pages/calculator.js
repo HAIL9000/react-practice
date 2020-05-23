@@ -31,7 +31,7 @@ class Calculator extends React.Component {
         let userInput = this.state.userInput;
         let userInputCount = this.state.userInputCount;
 
-        const operators = ["+","-","x","÷","="];
+        const operators = ["+","-","x","÷"];
 
         // CLEAR case
         if(id === "CLEAR"){
@@ -43,7 +43,19 @@ class Calculator extends React.Component {
                 }
             );
 
-        // operator case
+        // = case
+        } else if(id === "=") {
+            if(userInput.length === 3){
+                userInput = doMath(userInput)
+                userInputCount = 0;
+                this.setState(
+                    {
+                        userInput: userInput,
+                        userInputCount: userInputCount,
+                        displayIndex: userInputCount,
+                    }
+                );
+        // all other operators case
         } else if(operators.includes(id)) {
             // if the user input is three long, we have two numbers and an operator
             // so do some math and condense
@@ -178,9 +190,8 @@ function doMath(input) {
         case "÷":
             result = left / right;
             break;
-        case "=":
-            result = right;
-            break;
+        default:
+            // we should never get here
     }
 
     const arrayResult = (result + "").split("")
