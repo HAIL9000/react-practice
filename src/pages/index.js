@@ -31,6 +31,9 @@ const IndexPage = () => (
     <ListItem>
       <Link to="/calculator/">Calculator</Link>
     </ListItem>
+    <ListItem>
+      <Link to="/funccalc/">Calculator 2</Link> - a better designed calculator
+    </ListItem>
   </Layout>
 )
 
