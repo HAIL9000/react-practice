@@ -199,5 +199,6 @@ function doMath(input) {
     return [arrayResult];
 
 }
+export { doMath };
 
 export default CalculatorPage
