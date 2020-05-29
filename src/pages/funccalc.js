@@ -16,11 +16,17 @@ function Calculator() {
                 leftOp={leftOp}
                 operator={operator}
                 setOperator={setOperator}
+                clearInput={clearInput}
             />
+
+    function clearInput() {
+        setLeftOp("");
+        setOperator(null);
+    }
 }
 
 function CalcGrid(props) {
-    const {setLeftOp, leftOp, operator, setOperator} = props
+    const {setLeftOp, leftOp, operator, setOperator, clearInput} = props
     return <div>
         <div>
             <NumButton
@@ -113,8 +119,7 @@ function CalcGrid(props) {
         <div>
             <ClearButton
                 id="CLEAR"
-                onClick={setLeftOp}
-                leftOp={leftOp}
+                onClick={clearInput}
             />
         </div>
     </div>
@@ -140,7 +145,7 @@ function OpButton(props) {
 }
 
 function ClearButton(props) {
-    const handleClick = () => {props.onClick("")}
+    const handleClick = () => {props.onClick()}
     return <button
              className={calclutorStyles.button}
              onClick={handleClick}>
