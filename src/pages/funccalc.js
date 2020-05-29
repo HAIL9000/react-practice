@@ -8,113 +8,113 @@ import calclutorStyles from "./calculator.module.css"
 
 function Calculator() {
 
-    const [userInput, setUserInput] = useState("");
+    const [leftOp, setLeftOp] = useState("");
     const [operator, setOperator] = useState(null);
 
     return <CalcGrid
-                setUserInput={setUserInput}
-                userInput={userInput}
+                setLeftOp={setLeftOp}
+                leftOp={leftOp}
                 operator={operator}
                 setOperator={setOperator}
             />
 }
 
 function CalcGrid(props) {
-    const {setUserInput, userInput, operator, setOperator} = props
+    const {setLeftOp, leftOp, operator, setOperator} = props
     return <div>
         <div>
             <NumButton
                 id="1"
-                onClick={setUserInput}
-                userInput={userInput}
+                onClick={setLeftOp}
+                leftOp={leftOp}
             />
             <NumButton
                 id="2"
-                onClick={setUserInput}
-                userInput={userInput}
+                onClick={setLeftOp}
+                leftOp={leftOp}
             />
             <NumButton
                 id="3"
-                onClick={setUserInput}
-                userInput={userInput}
+                onClick={setLeftOp}
+                leftOp={leftOp}
             />
             <OpButton
                 id="+"
                 onClick={setOperator}
-                userInput={operator}
+                leftOp={operator}
             />
         </div>
         <div>
             <NumButton
                 id="4"
-                onClick={setUserInput}
-                userInput={userInput}
+                onClick={setLeftOp}
+                leftOp={leftOp}
             />
             <NumButton
                 id="5"
-                onClick={setUserInput}
-                userInput={userInput}
+                onClick={setLeftOp}
+                leftOp={leftOp}
             />
             <NumButton
                 id="6"
-                onClick={setUserInput}
-                userInput={userInput}
+                onClick={setLeftOp}
+                leftOp={leftOp}
             />
             <OpButton
                 id="-"
                 onClick={setOperator}
-                userInput={operator}
+                leftOp={operator}
             />
         </div>    
         <div>
             <NumButton
                 id="7"
-                onClick={setUserInput}
-                userInput={userInput}
+                onClick={setLeftOp}
+                leftOp={leftOp}
             />
             <NumButton
                 id="8"
-                onClick={setUserInput}
-                userInput={userInput}
+                onClick={setLeftOp}
+                leftOp={leftOp}
             />
             <NumButton
                 id="9"
-                onClick={setUserInput}
-                userInput={userInput}
+                onClick={setLeftOp}
+                leftOp={leftOp}
             />
             <OpButton
                 id="x"
                 onClick={setOperator}
-                userInput={operator}
+                leftOp={operator}
             />
         </div>    
         <div>
             <NumButton
                 id="0"
-                onClick={setUserInput}
-                userInput={userInput}
+                onClick={setLeftOp}
+                leftOp={leftOp}
             />
             <NumButton
                 id="."
-                onClick={setUserInput}
-                userInput={userInput}
+                onClick={setLeftOp}
+                leftOp={leftOp}
             />
             <OpButton
                 id="="
                 onClick={setOperator}
-                userInput={operator}
+                leftOp={operator}
             />
             <OpButton
                 id="÷"
                 onClick={setOperator}
-                userInput={operator}
+                leftOp={operator}
             />
         </div>    
         <div>
-            <NumButton
+            <ClearButton
                 id="CLEAR"
-                onClick={setUserInput}
-                userInput={userInput}
+                onClick={setLeftOp}
+                leftOp={leftOp}
             />
         </div>
     </div>
@@ -122,7 +122,7 @@ function CalcGrid(props) {
 }
 
 function NumButton(props) {
-    const handleClick = () => {props.onClick(props.userInput + props.id)}
+    const handleClick = () => {props.onClick(props.leftOp + props.id)}
     return <button
              className={calclutorStyles.button}
              onClick={handleClick}>
@@ -133,6 +133,15 @@ function NumButton(props) {
 function OpButton(props) {
     const handleClick = () => {props.onClick(props.id)}
     return <button 
+             className={calclutorStyles.button}
+             onClick={handleClick}>
+             {props.id}
+           </button>
+}
+
+function ClearButton(props) {
+    const handleClick = () => {props.onClick("")}
+    return <button
              className={calclutorStyles.button}
              onClick={handleClick}>
              {props.id}
