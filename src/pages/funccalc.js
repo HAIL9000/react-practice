@@ -11,32 +11,49 @@ function Calculator() {
     const [leftOp, setLeftOp] = useState("");
     const [operator, setOperator] = useState(null);
     const [rightOp, setRightOp] = useState("");
-    const [displayIndex, setDisplayIndex] = useState(null);
+    const [displayIndex, setDisplayIndex] = useState("");
 
     function clearInput() {
         setLeftOp("");
+        setRightOp("");
+        setDisplayIndex("");
         setOperator(null);
     }
 
     function storeUserInput(input){
+        let updatedInput;
         if(operator) {
-           setRightOp(rightOp + input);
+           updatedInput = rightOp + input;
+           setRightOp(updatedInput);
         } else {
-            setLeftOp(leftOp + input);
+            updatedInput = leftOp + input;
+            setLeftOp(updatedInput);
         }
+        setDisplayIndex(updatedInput);
     }
 
-    return <CalcGrid
-                storeUserInput={storeUserInput}
-                operator={operator}
-                setOperator={setOperator}
-                clearInput={clearInput}
-            />
+    function doMath(){
+        setLeftOp("");
+        setRightOp("");
+        setDisplayIndex("hewwo :3c");
+        setOperator(null);
+    }
+
+    return <div>
+                <div>{displayIndex}</div>
+                <CalcGrid
+                    storeUserInput={storeUserInput}
+                    operator={operator}
+                    setOperator={setOperator}
+                    clearInput={clearInput}
+                    doMath={doMath}
+                />
+            </div>
 
 }
 
 function CalcGrid(props) {
-    const {storeUserInput, operator, setOperator, clearInput} = props
+    const {storeUserInput, operator, setOperator, clearInput, doMath} = props
     return <div>
         <div>
             <NumButton
@@ -104,10 +121,9 @@ function CalcGrid(props) {
                 id="."
                 onClick={storeUserInput}
             />
-            <OpButton
+            <GenButton
                 id="="
-                onClick={setOperator}
-                leftOp={operator}
+                onClick={doMath}
             />
             <OpButton
                 id="÷"
@@ -116,7 +132,7 @@ function CalcGrid(props) {
             />
         </div>    
         <div>
-            <ClearButton
+            <GenButton
                 id="CLEAR"
                 onClick={clearInput}
             />
@@ -143,7 +159,7 @@ function OpButton(props) {
            </button>
 }
 
-function ClearButton(props) {
+function GenButton(props) {
     const handleClick = () => {props.onClick()}
     return <button
              className={calclutorStyles.button}
