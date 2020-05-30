@@ -10,39 +10,46 @@ function Calculator() {
 
     const [leftOp, setLeftOp] = useState("");
     const [operator, setOperator] = useState(null);
-
-    return <CalcGrid
-                setLeftOp={setLeftOp}
-                leftOp={leftOp}
-                operator={operator}
-                setOperator={setOperator}
-                clearInput={clearInput}
-            />
+    const [rightOp, setRightOp] = useState("");
+    const [displayIndex, setDisplayIndex] = useState(null);
 
     function clearInput() {
         setLeftOp("");
         setOperator(null);
     }
+
+    function storeUserInput(input){
+        if(operator) {
+           setRightOp(rightOp + input);
+        } else {
+            setLeftOp(leftOp + input);
+        }
+    }
+
+    return <CalcGrid
+                storeUserInput={storeUserInput}
+                operator={operator}
+                setOperator={setOperator}
+                clearInput={clearInput}
+            />
+
 }
 
 function CalcGrid(props) {
-    const {setLeftOp, leftOp, operator, setOperator, clearInput} = props
+    const {storeUserInput, operator, setOperator, clearInput} = props
     return <div>
         <div>
             <NumButton
                 id="1"
-                onClick={setLeftOp}
-                leftOp={leftOp}
+                onClick={storeUserInput}
             />
             <NumButton
                 id="2"
-                onClick={setLeftOp}
-                leftOp={leftOp}
+                onClick={storeUserInput}
             />
             <NumButton
                 id="3"
-                onClick={setLeftOp}
-                leftOp={leftOp}
+                onClick={storeUserInput}
             />
             <OpButton
                 id="+"
@@ -53,18 +60,15 @@ function CalcGrid(props) {
         <div>
             <NumButton
                 id="4"
-                onClick={setLeftOp}
-                leftOp={leftOp}
+                onClick={storeUserInput}
             />
             <NumButton
                 id="5"
-                onClick={setLeftOp}
-                leftOp={leftOp}
+                onClick={storeUserInput}
             />
             <NumButton
                 id="6"
-                onClick={setLeftOp}
-                leftOp={leftOp}
+                onClick={storeUserInput}
             />
             <OpButton
                 id="-"
@@ -75,18 +79,15 @@ function CalcGrid(props) {
         <div>
             <NumButton
                 id="7"
-                onClick={setLeftOp}
-                leftOp={leftOp}
+                onClick={storeUserInput}
             />
             <NumButton
                 id="8"
-                onClick={setLeftOp}
-                leftOp={leftOp}
+                onClick={storeUserInput}
             />
             <NumButton
                 id="9"
-                onClick={setLeftOp}
-                leftOp={leftOp}
+                onClick={storeUserInput}
             />
             <OpButton
                 id="x"
@@ -97,13 +98,11 @@ function CalcGrid(props) {
         <div>
             <NumButton
                 id="0"
-                onClick={setLeftOp}
-                leftOp={leftOp}
+                onClick={storeUserInput}
             />
             <NumButton
                 id="."
-                onClick={setLeftOp}
-                leftOp={leftOp}
+                onClick={storeUserInput}
             />
             <OpButton
                 id="="
@@ -127,7 +126,7 @@ function CalcGrid(props) {
 }
 
 function NumButton(props) {
-    const handleClick = () => {props.onClick(props.leftOp + props.id)}
+    const handleClick = () => {props.onClick(props.id)}
     return <button
              className={calclutorStyles.button}
              onClick={handleClick}>
