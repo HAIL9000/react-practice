@@ -33,10 +33,32 @@ function Calculator() {
     }
 
     function doMath(){
-        setLeftOp("");
+        let numLeft = Number(leftOp);
+        let numRight = Number(rightOp);
+        let result;
+
+        switch(operator){
+        case "+":
+            result = numLeft + numRight;
+            break;
+        case "-":
+            result = numLeft - numRight;
+            break;
+        case "x":
+            result = numLeft * numRight;
+            break;
+        case "÷":
+            result = numLeft / numRight;
+            break;
+        default:
+            console.log("Operator error!!")
+
+    }
+
+        setLeftOp(result + "");
         setRightOp("");
-        setDisplayIndex("hewwo :3c");
-        setOperator(null);
+        setDisplayIndex(result + "");
+        setOperator("");
     }
 
     return <div>
