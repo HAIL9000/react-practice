@@ -29,10 +29,13 @@ const IndexPage = () => (
     </p>
     <h3>~*~ Project Index ~*~</h3>
     <ListItem>
-      <Link to="/calculator/">Calculator</Link>
+      <Link to="/calculator/">Calculator</Link> - my first pass at a react project... there's room for improvement! but it has a few jest tests
     </ListItem>
     <ListItem>
-      <Link to="/funccalc/">Calculator 2</Link> - a better designed calculator
+      <Link to="/funccalc/">Calculator 2</Link> - a better designed calculator, I used this to learn about functional components and hooks
+    </ListItem>
+    <ListItem>
+      <Link to="/cattreats/">Cat Treat Cafe</Link> - my third project! give treats to cats! :3
     </ListItem>
   </Layout>
 )
