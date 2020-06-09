@@ -43,6 +43,17 @@ function Cafe() {
     setCatTracker(newCats)
   }
 
+  function resetTreats(catName) {
+    const newCats = catTracker.map(cat => {
+      if (cat.name === catName) {
+        return { ...cat, treatCount: 0 }
+      } else {
+        return cat
+      }
+    })
+    setCatTracker(newCats)
+  }
+
   return (
     <div>
       Welcome to the Cat Treat Cafe! Please register your cat!
@@ -52,13 +63,15 @@ function Cafe() {
         setCatInput={setCatInput}
       />
       <p>Cats currently dining with us.... </p>
-      {catTracker.map(cat => {
+      {catTracker.map((cat, index) => {
         return (
           <Cat
+            key={index}
             name={cat.name}
             treatCount={cat.treatCount}
             giveTreat={giveTreat}
             removeCat={removeCat}
+            resetTreats={resetTreats}
           />
         )
       })}
@@ -71,21 +84,20 @@ function Cat(props) {
     <div>
       <div>Name: {props.name}</div>
       <div>Treat Count: {props.treatCount}</div>
-      <div>
-        <TreatButton handleClick={props.giveTreat} catName={props.name}>
-          Give Treat!
-        </TreatButton>
-      </div>
-      <div>
-        <TreatButton handleClick={props.removeCat} catName={props.name}>
-          Send Home
-        </TreatButton>
-      </div>
+      <CatButton handleClick={props.giveTreat} catName={props.name}>
+        Give Treat!
+      </CatButton>
+      <CatButton handleClick={props.removeCat} catName={props.name}>
+        Send Home
+      </CatButton>
+      <CatButton handleClick={props.resetTreats} catName={props.name}>
+        Reset Treats
+      </CatButton>
     </div>
   )
 }
 
-function TreatButton(props) {
+function CatButton(props) {
   const handleClick = () => {
     props.handleClick(props.catName)
   }
