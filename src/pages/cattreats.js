@@ -6,6 +6,7 @@ import SEO from "../components/seo";
 
 function Cafe() {
   const [catTracker, setCatTracker] = useState([]);
+  const [catInput, setCatInput] = useState("");
 
   function giveTreat(catName) {
     const catIndex = catTracker.findIndex((x) => x.name === catName);
@@ -37,18 +38,32 @@ function Cafe() {
     }
   }
 
+  function registerCat(event) {
+    event.preventDefault();
+    const cat = {
+      name: catInput,
+      treatCount: 0,
+    };
+    const newCats = [...catTracker, cat];
+    setCatTracker(newCats);
+  }
+
   return (
     <div>
-      <p>
-        <Cat
-          name="Atton"
-          treatCount={getCount("Atton")}
-          giveTreat={giveTreat}
-        />
-      </p>
-      <p>
-        <Cat name="Unix" treatCount={getCount("Unix")} giveTreat={giveTreat} />
-      </p>
+      <CatCreator
+        onSubmit={registerCat}
+        catInput={catInput}
+        setCatInput={setCatInput}
+      />
+      {catTracker.map((cat) => {
+        return (
+          <Cat
+            name={cat.name}
+            treatCount={cat.treatCount}
+            giveTreat={giveTreat}
+          />
+        );
+      })}
     </div>
   );
 }
@@ -68,6 +83,22 @@ function TreatButton(props) {
     props.handleClick(props.catName);
   };
   return <button onClick={handleClick}>Give Treat!</button>;
+}
+
+function CatCreator(props) {
+  return (
+    <form onSubmit={(event) => props.onSubmit(event)}>
+      <label>
+        <p>Cat Name:</p>
+        <input
+          type="text"
+          value={props.catInput}
+          onChange={(event) => props.setCatInput(event.target.value)}
+        />
+      </label>
+      <input type="submit" value="Register Cat" />
+    </form>
+  );
 }
 
 const CatPage = () => (
