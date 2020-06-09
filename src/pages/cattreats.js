@@ -9,24 +9,14 @@ function Cafe() {
   const [catInput, setCatInput] = useState("");
 
   function giveTreat(catName) {
-    const catIndex = catTracker.findIndex((x) => x.name === catName);
-
-    if (catIndex === -1) {
-      const newCat = {
-        name: catName,
-        treatCount: 1,
-      };
-      setCatTracker([...catTracker, newCat]);
-    } else {
-      const newCats = catTracker.map((cat, index) => {
-        if (index === catIndex) {
-          return { ...cat, treatCount: cat.treatCount + 1 };
-        } else {
-          return cat;
-        }
-      });
-      setCatTracker(newCats);
-    }
+    const newCats = catTracker.map((cat) => {
+      if (cat.name === catName) {
+        return { ...cat, treatCount: cat.treatCount + 1 };
+      } else {
+        return cat;
+      }
+    });
+    setCatTracker(newCats);
   }
 
   function getCount(catName) {
@@ -50,11 +40,13 @@ function Cafe() {
 
   return (
     <div>
+      Welcome to the Cat Treat Cafe! Please register your cat!
       <CatCreator
         onSubmit={registerCat}
         catInput={catInput}
         setCatInput={setCatInput}
       />
+      <p>Cats currently dining with us.... </p>
       {catTracker.map((cat) => {
         return (
           <Cat
@@ -89,7 +81,6 @@ function CatCreator(props) {
   return (
     <form onSubmit={(event) => props.onSubmit(event)}>
       <label>
-        <p>Cat Name:</p>
         <input
           type="text"
           value={props.catInput}
