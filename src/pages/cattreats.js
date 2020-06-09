@@ -1,57 +1,57 @@
-import React, { useState } from "react"
-import { Link } from "gatsby"
+import React, { useState } from "react";
+import { Link } from "gatsby";
 
-import Layout from "../components/layout"
-import SEO from "../components/seo"
+import Layout from "../components/layout";
+import SEO from "../components/seo";
 
 function Cafe() {
-  const [catTracker, setCatTracker] = useState([])
-  const [catInput, setCatInput] = useState("")
+  const [catTracker, setCatTracker] = useState([]);
+  const [catInput, setCatInput] = useState("");
 
   function giveTreat(catName) {
     const newCats = catTracker.map(cat => {
       if (cat.name === catName) {
-        return { ...cat, treatCount: cat.treatCount + 1 }
+        return { ...cat, treatCount: cat.treatCount + 1 };
       } else {
-        return cat
+        return cat;
       }
-    })
-    setCatTracker(newCats)
+    });
+    setCatTracker(newCats);
   }
 
   function getCount(catName) {
-    let cat = catTracker.find(x => x.name === catName)
+    let cat = catTracker.find(x => x.name === catName);
     if (cat) {
-      return cat.treatCount
+      return cat.treatCount;
     } else {
-      return 0
+      return 0;
     }
   }
 
   function registerCat(event) {
-    event.preventDefault()
+    event.preventDefault();
     const cat = {
       name: catInput,
       treatCount: 0,
-    }
-    const newCats = [...catTracker, cat]
-    setCatTracker(newCats)
+    };
+    const newCats = [...catTracker, cat];
+    setCatTracker(newCats);
   }
 
   function removeCat(catName) {
-    const newCats = catTracker.filter(cat => cat.name !== catName)
-    setCatTracker(newCats)
+    const newCats = catTracker.filter(cat => cat.name !== catName);
+    setCatTracker(newCats);
   }
 
   function resetTreats(catName) {
     const newCats = catTracker.map(cat => {
       if (cat.name === catName) {
-        return { ...cat, treatCount: 0 }
+        return { ...cat, treatCount: 0 };
       } else {
-        return cat
+        return cat;
       }
-    })
-    setCatTracker(newCats)
+    });
+    setCatTracker(newCats);
   }
 
   return (
@@ -73,10 +73,10 @@ function Cafe() {
             removeCat={removeCat}
             resetTreats={resetTreats}
           />
-        )
+        );
       })}
     </div>
-  )
+  );
 }
 
 function Cat(props) {
@@ -94,14 +94,14 @@ function Cat(props) {
         Reset Treats
       </CatButton>
     </div>
-  )
+  );
 }
 
 function CatButton(props) {
   const handleClick = () => {
-    props.handleClick(props.catName)
-  }
-  return <button onClick={handleClick}>{props.children}</button>
+    props.handleClick(props.catName);
+  };
+  return <button onClick={handleClick}>{props.children}</button>;
 }
 
 function CatCreator(props) {
@@ -116,7 +116,7 @@ function CatCreator(props) {
       </label>
       <input type="submit" value="Register Cat" />
     </form>
-  )
+  );
 }
 
 const CatPage = () => (
@@ -126,6 +126,6 @@ const CatPage = () => (
     <Cafe />
     <Link to="/">Go Home</Link>
   </Layout>
-)
+);
 
-export default CatPage
+export default CatPage;
