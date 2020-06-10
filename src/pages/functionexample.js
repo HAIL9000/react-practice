@@ -2,7 +2,11 @@ import React, { useState } from "react";
 
 function Child(props) {
   const handleClick = () => props.setCount(props.count + 1);
-  return <button onClick={handleClick}>{props.children}</button>;
+  return (
+    <button onClick={handleClick}>
+      {props.children}: {props.count}
+    </button>
+  );
 }
 
 function Parent() {
@@ -10,9 +14,8 @@ function Parent() {
 
   return (
     <div>
-      Count: {count}
       <Child count={count} setCount={setCount}>
-        +1
+        Count
       </Child>
     </div>
   );
