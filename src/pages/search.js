@@ -6,7 +6,12 @@ import SEO from "../components/seo";
 
 const fruits = [
   "apple",
+  "apricot",
   "pear",
+  "mango",
+  "magosteen",
+  "papaya",
+  "passion fruit",
   "orange",
   "peach",
   "strawberry",
@@ -24,17 +29,22 @@ function Search() {
   let [fruitMatches, setFruitMatches] = useState([]);
 
   function lookup(event) {
-    setInput(event.target.value);
-    const matches = fruits.filter(fruit => fruit.includes(input));
+    const currentInput = event.target.value;
+
+    setInput(currentInput);
+    const matches = fruits.filter(
+      fruit => fruit.startsWith(currentInput) && currentInput !== ""
+    );
     setFruitMatches(matches);
   }
 
   return (
     <div>
-      <SearchForm setInput={setInput} lookup={lookup} />
+      <SearchForm setInput={setInput} lookup={lookup} input={input} />
       {fruitMatches.map(fruit => {
         return <div>{fruit}</div>;
       })}
+      Suggestions: {fruitMatches.length}
     </div>
   );
 }
