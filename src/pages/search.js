@@ -9,7 +9,7 @@ const fruits = [
   "apricot",
   "pear",
   "mango",
-  "magosteen",
+  "mangosteen",
   "papaya",
   "passion fruit",
   "orange",
@@ -40,9 +40,10 @@ function Search() {
 
   return (
     <div>
+      Try searching some fruit....
       <SearchForm setInput={setInput} lookup={lookup} input={input} />
       {fruitMatches.map(fruit => {
-        return <div>{fruit}</div>;
+        return <li>{fruit}</li>;
       })}
       Suggestions: {fruitMatches.length}
     </div>

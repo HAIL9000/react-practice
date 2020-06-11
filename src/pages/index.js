@@ -38,6 +38,9 @@ const IndexPage = () => (
       <Link to="/search/">Search Autocomplete</Link> - fourth project!
       autocompletes user searches
     </ListItem>
+    <ListItem>
+      <Link to="/weather/">Weather Forecast</Link> - practice using APIs
+    </ListItem>
   </Layout>
 );
 
