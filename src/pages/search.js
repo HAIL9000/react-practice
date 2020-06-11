@@ -4,25 +4,49 @@ import { Link } from "gatsby";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 
+const fruits = [
+  "apple",
+  "pear",
+  "orange",
+  "peach",
+  "strawberry",
+  "lemon",
+  "lime",
+  "blueberry",
+  "cranberry",
+  "durian",
+  "kiwi",
+  "banana",
+];
+
 function Search() {
   let [input, setInput] = useState("");
+  let [fruitMatches, setFruitMatches] = useState([]);
+
+  function lookup(event) {
+    setInput(event.target.value);
+    const matches = fruits.filter(fruit => fruit.includes(input));
+    setFruitMatches(matches);
+  }
 
   return (
     <div>
-      <SearchForm setInput={setInput} input={input} />
-      User Input: {input}
+      <SearchForm setInput={setInput} lookup={lookup} />
+      {fruitMatches.map(fruit => {
+        return <div>{fruit}</div>;
+      })}
     </div>
   );
 }
 
 function SearchForm(props) {
   return (
-    <form onSubmit={() => props.setInput(props.Input)}>
+    <form>
       <label>
         <input
           type="text"
           value={props.input}
-          onChange={event => props.setInput(event.target.value)}
+          onChange={event => props.lookup(event)}
         />
       </label>
     </form>
